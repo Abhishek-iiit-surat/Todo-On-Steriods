@@ -1,0 +1,6 @@
+express@latest
+pg@latest
+bcrypt@latest
+jsonwebtoken@latest
+dotenv@latest
+passport@latest
