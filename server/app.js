@@ -13,7 +13,7 @@ app.use(cors()); // to avoid CORS error
 
 // Routes
 app.use('/auth', authRoutes);
-app.use('/task',taskRoutes);
-app.use('/ai',aiRoutes);
+// app.use('/task',taskRoutes);
+// app.use('/ai',aiRoutes);
 
 module.exports = app;
