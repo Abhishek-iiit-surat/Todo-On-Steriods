@@ -1,4 +1,4 @@
-const aiService = require('../services/aiService');
+const aiService = require('../service/aiService');
 
 const askAi = async (req, res) => {
     try {
@@ -10,4 +10,4 @@ const askAi = async (req, res) => {
     }
 }
 
-modules.exports = { askAi }
+module.exports = { askAi }
