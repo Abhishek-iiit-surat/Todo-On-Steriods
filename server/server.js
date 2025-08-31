@@ -1,6 +1,7 @@
 const app = require('./app');
+const {logger }= require('../server/src/middlewares/logger');
 const PORT = 8001;
 
 app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
+    logger.info(`Backend Service Startes at: ${PORT}`);
 });
