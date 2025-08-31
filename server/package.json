@@ -61,6 +61,7 @@
     "negotiator": "^1.0.0",
     "node-addon-api": "^8.5.0",
     "node-gyp-build": "^4.8.4",
+    "nodemon": "^3.1.10",
     "object-assign": "^4.1.1",
     "object-inspect": "^1.13.4",
     "on-finished": "^2.4.1",
@@ -104,10 +105,10 @@
     "unpipe": "^1.0.0",
     "utils-merge": "^1.0.1",
     "vary": "^1.1.2",
+    "winston": "^3.17.0",
     "wrappy": "^1.0.2",
     "xtend": "^4.0.2"
   },
-  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
