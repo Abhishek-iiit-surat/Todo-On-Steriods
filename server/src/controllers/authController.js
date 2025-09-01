@@ -18,7 +18,7 @@ const register = async (req, res) => {
 const login = async (req, res) => {
   const { email, password } = req.body;
   try {
-    const response = await loginUser(email, password);
+    const response = await loginUser({email, password});
     logger.info('User Logged In', { email, message: 'User Logged In With Email' });
     res.status(200).json(response);
   } catch (err) {
