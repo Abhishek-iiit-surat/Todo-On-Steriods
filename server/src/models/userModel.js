@@ -23,16 +23,20 @@ const createUser = async ({ email, passwordHash = null, authProvider = 'local', 
 
 const findUserByEmail = async (email) => {
     try {
-        const query = `SELECT * FROM users WHERE email = $1`;
+        const query = `SELECT * FROM users WHERE email ILIKE $1`;
         const result = await Pool.query(query, [email]);
-        logger.info('User lookup', { email, message: 'User lookup by email' });
+        if (result.rows.length === 0) {
+            logger.info('No user found by email', { email });
+            return null;
+        }
+        logger.info('User found by email', { email });
         return result.rows[0];
     } catch (error) {
-        logger.log('error', 'Error finding user by email', { email, message: error.message });
+        logger.error('Error finding user by email', { email, message: error.message });
         return null;
-        // throw new Error('Error finding user by email');
     }
 }
+
 
 const getUserById = async (userid) => {
     try {

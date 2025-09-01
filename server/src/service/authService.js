@@ -1,15 +1,18 @@
 const { generateToken } = require('../utils/generateToken')
 const { hashPassword } = require('../utils/hashPassword')
 const { createUser, findUserByEmail } = require('../models/userModel')
+const bcrypt = require('bcrypt');
 const { logger } = require('../middlewares/logger');
 
 const registerUser = async (username, email, password) => {
     const existingUser = await findUserByEmail(email);
 
-    if (existingUser) {
+    if (existingUser)
+    {
         throw new Error('User already exists');
     }
-    else {
+    else
+    {
         const hashedPassword = await hashPassword(password); // dont store passwords store hashed passwords
         const newUser = await createUser({ email: email, passwordHash: hashedPassword, authProvider: 'local' });
         const token = generateToken(newUser.id);
@@ -17,23 +20,24 @@ const registerUser = async (username, email, password) => {
     }
 }
 
-const loginUser = async (userDetails) => {
-    const { email, password, username } = userDetails;
+const loginUser = async ({email, password}) => {
     const existingUser = await findUserByEmail(email);
-    if (!existingUser) {
+    if (existingUser == null) 
+    {
         throw new Error('Invalid email!!');
     }
-    else {
-        const isPasswordValid = await bcrypt.compare(password, existingUser.password);
+    else
+    {
+        const isPasswordValid = await bcrypt.compare(password, existingUser.password_hash);
         if (!isPasswordValid) {
             throw new Error('Invalid password!!');
         }
         else {
             const token = generateToken(existingUser.id);
-            return { user: existingUser, token: token };
+            const { password_hash, ...safeUser } = existingUser;
+            return { user: safeUser, token };
         }
     }
-    return { user: null, token: null };
 }
 
 module.exports = { registerUser, loginUser }
