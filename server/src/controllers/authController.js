@@ -1,7 +1,7 @@
-const { registerUser, loginUser } = require('../service/authService');
+const { registerUser, loginUser, loginUserBygoogle } = require('../service/authService');
 const { logger } = require('../middlewares/logger');
 const { message } = require('statuses');
-
+const { OAuth2Client } = require('google-auth-library');
 const register = async (req, res) => {
   const { name, email, password } = req.body;
   try {
@@ -18,7 +18,7 @@ const register = async (req, res) => {
 const login = async (req, res) => {
   const { email, password } = req.body;
   try {
-    const response = await loginUser({email, password});
+    const response = await loginUser({ email, password });
     logger.info('User Logged In', { email, message: 'User Logged In With Email' });
     res.status(200).json(response);
   } catch (err) {
@@ -27,4 +27,31 @@ const login = async (req, res) => {
   }
 };
 
-module.exports = { register, login };
+const googleAuth = async (req, res) => {
+  const googleClient = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
+  try {
+    const { token: googleToken } = req.body;
+
+    // token verification
+    const ticket = await googleClient.verifyIdToken({
+      idToken: googleToken,
+      audience: process.env.GOOGLE_CLIENT_ID,
+    });
+
+    // register and login
+    const payload = ticket.getPayload();
+    let authenticated = await loginUserBygoogle(payload);
+    if (authenticated) {
+      logger.info('User Logged In via Google', { email: payload.email, message: 'User Logged In With Google' });
+      res.status(200).json(authenticated);
+    } else {
+      res.status(400).json({ message: "Google Authentication Failed! Please try again." });
+    }
+
+  } catch (error) {
+    logger.log('error', 'Google Auth Error', { message: error.message });
+    res.status(400).json({ message: "Google Authentication Failed! Please try again." });
+  }
+}
+
+module.exports = { register, login, googleAuth };
