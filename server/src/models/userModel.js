@@ -1,14 +1,14 @@
 const { logger } = require('../middlewares/logger');
 const Pool = require('./db');
 
-const createUser = async ({ email, passwordHash = null, authProvider = 'local', googleId = null }) => {
+const createUser = async ({ username, email, passwordHash = null, authProvider = 'local', googleId = null }) => {
     try {
         const query = `
-            INSERT INTO users (email, password_hash, auth_provider, google_id)
-            VALUES ($1, $2, $3, $4)
+            INSERT INTO users (username,email, password_hash, auth_provider, google_id)
+            VALUES ($1, $2, $3, $4, $5)
             RETURNING *;
         `;
-        const values = [email, passwordHash, authProvider, googleId];
+        const values = [username, email, passwordHash, authProvider, googleId];
         const result = await Pool.query(query, values);
 
         logger.info('User created', { email, message: 'User created in database' });
