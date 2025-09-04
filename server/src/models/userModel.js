@@ -4,7 +4,7 @@ const Pool = require('./db');
 const createUser = async ({ username, email, passwordHash = null, authProvider = 'local', googleId = null }) => {
     try {
         const query = `
-            INSERT INTO users (username,email, password_hash, auth_provider, google_id)
+            INSERT INTO users (username, email, password_hash, auth_provider, google_id)
             VALUES ($1, $2, $3, $4, $5)
             RETURNING *;
         `;
