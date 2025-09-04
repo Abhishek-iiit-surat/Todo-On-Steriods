@@ -2,9 +2,9 @@ const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
 const authRoutes = require('./src/routes/authRoutes');
-const taskRoutes = require('./src/routes/taskRoutes');
-const aiRoutes = require('./src/routes/aiRoutes');
-
+// const taskRoutes = require('./src/routes/taskRoutes');
+// const aiRoutes = require('./src/routes/aiRoutes');
+const routes = require('./src/routes/index')
 dotenv.config();
 // CONFIGURING THE APP
 const app = express();
@@ -15,5 +15,6 @@ app.use(cors()); // to avoid CORS error
 app.use('/auth', authRoutes);
 // app.use('/task',taskRoutes);
 // app.use('/ai',aiRoutes);
+app.use('/', routes);
 
 module.exports = app;
