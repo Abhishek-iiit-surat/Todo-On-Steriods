@@ -7,9 +7,7 @@ const { logger } = require("../middlewares/logger");
 
 logger.info("Setting up routes");
 const authMiddleware = require("../middlewares/authMiddleware");
-// Apply auth middleware to all routes below
 router.use(authMiddleware); 
-// router.use("/auth", authRoutes);
 router.use("/tasks", taskRoutes);
 router.use("/ai", aiRoutes);
 

@@ -1,4 +1,5 @@
 const app = require('./app');
+require("dotenv").config();
 const {logger }= require('../server/src/middlewares/logger');
 const PORT = 8001;
 
