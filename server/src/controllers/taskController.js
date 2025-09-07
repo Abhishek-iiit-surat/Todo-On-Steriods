@@ -1,16 +1,13 @@
 // const taskService = require('../service/taskService');
-const {createTask} = require('../service/taskService');
+const { createTask } = require('../models/taskModel');
 
-// req={
-// userId, title, description, time
-// }
-
-const add = async (req, res) => {
-    // const { userId, title, description, time } = req.body;
+const addTask = async (req, res) => {
+    const userId = req.user.id;
+    const { title, description, due_date } = req.body;
     try {
         console.log("Added")
         // destructure attributes from request
-        const response = await createTask(userId, title, description, time); // call service layer
+        const response = await createTaskService(userId, title, description, due_date); // call service layer
         res.status(200).json({ message: "Task added successfully" });
     } catch (error) {
         console.log(error)
@@ -50,4 +47,4 @@ const deleteTask = async (req, res) => {
     }
 }
 
-module.exports = { add, getTasks, updateTask, deleteTask };
+module.exports = { addTask, getTasks, updateTask, deleteTask };
