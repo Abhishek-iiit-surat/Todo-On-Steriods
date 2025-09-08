@@ -1,5 +1,5 @@
 // const taskService = require('../service/taskService');
-const { createTask, getAllTasksByUserId } = require('../models/taskModel');
+const { createTask, getAllTasksByUserId, updateUserTask, deleteUserTask} = require('../models/taskModel');
 
 const addTask = async (req, res) => {
     const userId = req.user.id;
@@ -15,7 +15,6 @@ const addTask = async (req, res) => {
 
 const getAllTasks = async (req, res) => {
     try {
-        // destructure attributes from request
         const userId = req.user.id;
         const response = await getAllTasksByUserId(userId); // call model directly
         res.status(201).json(response);
@@ -27,8 +26,9 @@ const getAllTasks = async (req, res) => {
 const updateTask = async (req, res) => {
 
     try {
-        const { userID, taskId } = req.body;
-        const response = await taskService.updateTask(userID, taskId);
+        const taskId = req.params.id;
+        const { title, description, status, due_date, priority } = req.body;
+        const response = await updateUserTask(taskId, title, description, status, due_date, priority);
         res.status(200).json(response);
     } catch (error) {
         res.status(400).json({ message: "Couldn't update task at this moment. We are working on it!" })
@@ -37,8 +37,8 @@ const updateTask = async (req, res) => {
 
 const deleteTask = async (req, res) => {
     try {
-        const { userID, taskId } = req.body;
-        const response = await taskService.deleteTask(userID, taskId);
+        const taskId  = req.params.id;
+        const response = await deleteUserTask(taskId);
         res.status(200).json(response);
     } catch (error) {
         res.status(400).json({ message: "Couldn't delete task at this moment. We are working on it!" })

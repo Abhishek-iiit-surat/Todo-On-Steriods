@@ -21,7 +21,6 @@ const authMiddleware = (req, res, next) => {
     }
     else {
         res.status(401).json({ message: 'Authorization header missing' });
-        // next();
     }
 }
 
