@@ -1,25 +1,23 @@
 // const taskService = require('../service/taskService');
-const { createTask } = require('../models/taskModel');
+const { createTask, getAllTasksByUserId } = require('../models/taskModel');
 
 const addTask = async (req, res) => {
     const userId = req.user.id;
-    const { title, description, due_date } = req.body;
+    const { title, description, due_date, priority } = req.body;
     try {
-        console.log("Added")
-        // destructure attributes from request
-        const response = await createTaskService(userId, title, description, due_date); // call service layer
+        const response = await createTask(userId, title, description, due_date, priority); //  calling taskmodel directly
         res.status(200).json({ message: "Task added successfully" });
     } catch (error) {
         console.log(error)
-        res.status(400).json({ message: "ghi" })
+        res.status(400).json({ message: "Couldn't add the task at this moment" })
     }
 }
 
-const getTasks = async (req, res) => {
+const getAllTasks = async (req, res) => {
     try {
         // destructure attributes from request
-        const { userId, title, description, time } = req.body;
-        const response = await taskService.getTasks(userId, title, description, time); // call service layer
+        const userId = req.user.id;
+        const response = await getAllTasksByUserId(userId); // call model directly
         res.status(201).json(response);
     } catch (error) {
         res.status(400).json({ message: "Counldn't add task at this moment. We are working on it!" })
@@ -47,4 +45,4 @@ const deleteTask = async (req, res) => {
     }
 }
 
-module.exports = { addTask, getTasks, updateTask, deleteTask };
+module.exports = { addTask, getAllTasks, updateTask, deleteTask };

@@ -6,7 +6,6 @@ const { logger } = require('../middlewares/logger');
 
 const registerUser = async (username, email, password) => {
     const existingUser = await findUserByEmail(email);
-
     if (existingUser) {
         throw new Error('User already exists');
     }
