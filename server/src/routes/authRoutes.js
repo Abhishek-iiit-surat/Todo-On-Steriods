@@ -10,11 +10,11 @@ router.post('/googleAuth', googleAuth);
 
 // protected routes
 
-router.get('/me',(req,res,authMiddleware)=>{
+router.get('/me', authMiddleware, (req, res) => {
     try {
-        res.status(200).json({message:"User authenticated",user:req.user})
+        res.status(200).json({ message: "User authenticated", user: req.user })
     } catch (error) {
-        res.status(500).json({message:"User can not be authenticted, redirect to login"})
+        res.status(500).json({ message: "User can not be authenticted, redirect to login" })
     }
 })
 module.exports = router;

@@ -30,39 +30,53 @@ const getAllTasksByUserId = async (userId) => {
     }
 }
 
-const updateTask = async (taskId, title, description, status) => {
+const updateUserTask = async (taskId, title, description, status, due_date, priority, isHighRisk = "false") => {
     try {
         const query = `
-            INSERT INTO users (username, email, password_hash, auth_provider, google_id)
-            VALUES ($1, $2, $3, $4, $5)
+            UPDATE tasks
+            SET title = $1,
+            description = $2,
+            status = $3,
+            due_date = $4,
+            priority = $5,
+            is_high_risk = $6,
+            updated_at = $7
+            WHERE id = $8
             RETURNING *;
         `;
-        const values = [username, email, passwordHash, authProvider, googleId];
+        const values = [title, description, status, due_date, priority, isHighRisk, new Date(), taskId];
         const result = await Pool.query(query, values);
 
-        logger.info('User created', { email, message: 'User created in database' });
+        logger.info('Task updated', { message: 'Task updated in database' });
         return result.rows[0];
     } catch (error) {
-        logger.error('Error creating user', { email, message: error.message });
+        logger.error('Error updating task in database', { message: error.message });
         throw new Error('Error creating user');
     }
 }
 
-const deleteTask = async (taskId) => {
+const deleteUserTask = async (taskId) => {
     try {
         const query = `
-            INSERT INTO users (username, email, password_hash, auth_provider, google_id)
-            VALUES ($1, $2, $3, $4, $5)
-            RETURNING *;
-        `;
-        const values = [username, email, passwordHash, authProvider, googleId];
+      DELETE FROM tasks
+      WHERE id = $1
+      RETURNING *;
+    `;
+        const values = [taskId];
         const result = await Pool.query(query, values);
-        logger.info('User created', { email, message: 'User created in database' });
+
+        if (result.rows.length === 0) {
+            logger.warn("Task not found", { taskId });
+            return null; // or throw new Error("Task not found");
+        }
+
+        logger.info("Task deleted", { taskId, message: "Task deleted from database" });
         return result.rows[0];
     } catch (error) {
-        logger.error('Error creating user', { email, message: error.message });
-        throw new Error('Error creating user');
+        logger.error("Error deleting task", { taskId, message: error.message });
+        throw new Error("Error deleting task");
     }
-}
+};
 
-module.exports = { createTask, getAllTasksByUserId, updateTask, deleteTask };
+
+module.exports = { createTask, getAllTasksByUserId, updateUserTask, deleteUserTask };
