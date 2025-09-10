@@ -4,6 +4,7 @@
   "main": "index.js",
   "dependencies": {
     "accepts": "^2.0.0",
+    "axios": "^1.11.0",
     "bcrypt": "^6.0.0",
     "body-parser": "^2.2.0",
     "buffer-equal-constant-time": "^1.0.1",

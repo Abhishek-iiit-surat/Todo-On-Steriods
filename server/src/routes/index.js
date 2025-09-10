@@ -1,6 +1,5 @@
 const express = require("express");
 const router = express.Router();
-const authRoutes = require("./authRoutes");
 const taskRoutes = require("./taskRoutes");
 const aiRoutes = require("./aiRoutes");
 const { logger } = require("../middlewares/logger");

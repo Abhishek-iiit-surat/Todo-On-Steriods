@@ -5,3 +5,4 @@ jsonwebtoken@latest
 dotenv@latest
 passport@latest
 google-auth-library@latest
+axios@latest

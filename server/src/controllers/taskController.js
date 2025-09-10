@@ -1,9 +1,94 @@
-// const taskService = require('../service/taskService');
-const { createTask, getAllTasksByUserId, updateUserTask, deleteUserTask} = require('../models/taskModel');
+const axios = require('axios');
+const { createTask, getAllTasksByUserId, updateUserTask, deleteUserTask } = require('../models/taskModel');
+const { logger } = require('../middlewares/logger');
+
+
+const ai_title = async (content) => {
+    systemPrompt = "";
+
+    messages = [
+        { role: "system", content: systemPrompt },
+        { role: "user", content: content }
+    ]
+    const api_url = process.env.METALLAMA_API_URL;
+    const api_key_value = process.env.METALLAMA_API_KEY;
+    const headers = {
+        "Content-Type": "application/json",
+        api_key_value : "apikey"
+    }
+    const json_body = {
+        "model": "meta-llama/Meta-Llama-3-8B-Instruct",
+        "messages": messages,
+        "max_tokens": 2048,
+        "temperature": 0.5,
+        "repetition_penalty": 1.1,
+        "top_k": 10,
+        "top_p": 0.9
+    };
+
+    try {
+        const response = await axios.post(api_url, json_body, { headers });
+        const responseData = response.json();
+        if(responseData["answer"]){
+            return responseData["answer"];
+        }
+        else{
+            return "";
+        }
+    }
+    catch (error) {
+        logger.log('error in ai title generation', { message: error.message });
+        return "";
+    }
+}
+
+const ai_category_risk = async (content) => {
+    systemPrompt = "";
+    messages = [
+        { role: "system", content: systemPrompt },
+        { role: "user", content: content }
+    ]
+    const api_url = process.env.METALLAMA_API_URL;
+    const api_key_value = process.env.METALLAMA_API_KEY;
+    const headers = {
+        "Content-Type": "application/json",
+        api_key_value: "apikey"
+    }
+    const json_body = {
+        "model": "meta-llama/Meta-Llama-3-8B-Instruct",
+        "messages": messages,
+        "max_tokens": 2048,
+        "temperature": 0.5,
+        "repetition_penalty": 1.1,
+        "top_k": 10,
+        "top_p": 0.9
+    };
+
+    try {
+        const response = await axios.post(api_url, json_body, { headers });
+        const responseData = response.json();
+        if(responseData["answer"]){
+            return responseData["answer"];
+        }
+        else{
+            return "";
+        }
+    }
+    catch (error) {
+        looger.log('error in ai category and rist evaluation', { message: error.message });
+        return "";
+    }
+}
 
 const addTask = async (req, res) => {
+    // make an api call to meta-llama for title generation, decription refinement category evaluation and risk evalaution
     const userId = req.user.id;
     const { title, description, due_date, priority } = req.body;
+    const aiTitle = await ai_title(description);
+    const {category, isHighRisk} = await ai_category_risk(description);
+    if (aiTitle !== "") {
+        title = aiTitle;
+    }
     try {
         const response = await createTask(userId, title, description, due_date, priority); //  calling taskmodel directly
         res.status(200).json({ message: "Task added successfully" });
@@ -37,7 +122,7 @@ const updateTask = async (req, res) => {
 
 const deleteTask = async (req, res) => {
     try {
-        const taskId  = req.params.id;
+        const taskId = req.params.id;
         const response = await deleteUserTask(taskId);
         res.status(200).json(response);
     } catch (error) {
