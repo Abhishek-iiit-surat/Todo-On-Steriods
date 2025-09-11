@@ -1,13 +1,13 @@
 const Pool = require('./db');
 const { logger } = require('../middlewares/logger');
 
-const createTask = async (userId, title, description, due_date, priority) => {
+const createTask = async (userId, aiTitle, description, due_date, priority, category, isHighRisk) => {
     try {
         const query = `
             INSERT INTO tasks (user_id, title, description, due_date, priority, created_at, updated_at)
             VALUES ($1, $2, $3, $4, $5, $6, $7)
             RETURNING *;`
-        const values = [userId, title, description, due_date, priority, new Date(), new Date()];
+        const values = [userId, aiTitle, description, due_date, priority, new Date(), new Date()];
         const result = await Pool.query(query, values);
         logger.info('Task created', { userId, message: 'Task created in database' });
         return result.rows[0];
