@@ -4,10 +4,10 @@ const { logger } = require('../middlewares/logger');
 const createTask = async (userId, aiTitle, description, due_date, priority, category, isHighRisk) => {
     try {
         const query = `
-            INSERT INTO tasks (user_id, title, description, due_date, priority, created_at, updated_at)
-            VALUES ($1, $2, $3, $4, $5, $6, $7)
+            INSERT INTO tasks (user_id, title, description, due_date, priority, created_at, updated_at, category, ishighrisk)
+            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
             RETURNING *;`
-        const values = [userId, aiTitle, description, due_date, priority, new Date(), new Date()];
+        const values = [userId, aiTitle, description, due_date, priority, new Date(), new Date(), category, isHighRisk];
         const result = await Pool.query(query, values);
         logger.info('Task created', { userId, message: 'Task created in database' });
         return result.rows[0];
@@ -30,7 +30,7 @@ const getAllTasksByUserId = async (userId) => {
     }
 }
 
-const updateUserTask = async (taskId, title, description, status, due_date, priority, isHighRisk = "false") => {
+const updateUserTask = async (taskId, title, description, status, due_date, priority, category, isHighRisk = false) => {
     try {
         const query = `
             UPDATE tasks
@@ -39,12 +39,13 @@ const updateUserTask = async (taskId, title, description, status, due_date, prio
             status = $3,
             due_date = $4,
             priority = $5,
-            is_high_risk = $6,
-            updated_at = $7
-            WHERE id = $8
+            ishighrisk = $6,
+            updated_at = $7,
+            category = $8
+            WHERE id = $9
             RETURNING *;
         `;
-        const values = [title, description, status, due_date, priority, isHighRisk, new Date(), taskId];
+        const values = [title, description, status, due_date, priority, isHighRisk, new Date(), category, taskId];
         const result = await Pool.query(query, values);
 
         logger.info('Task updated', { message: 'Task updated in database' });
