@@ -15,7 +15,7 @@ function AddTaskCard() {
     }
 
     return (
-        <div className="bg-white rounded-2xl p-6 h-full shadow">
+        <div className="bg-white rounded-2xl p-6 h-full shadow" >
             <h3 className="text-lg font-semibold mb-3">Add New Task</h3>
             <form onSubmit={onSave} className="flex flex-col gap-3">
                 <input
