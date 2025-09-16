@@ -11,7 +11,9 @@ export const uiStore = create((set) => {
             set((state) => {
                 return { sidebarOpen: !state.sidebarOpen };
             })
-        }
+        },
+        themeColor:"#9933ff",
+        themeHoverColor:"#8000ff",
 
     };
 })
