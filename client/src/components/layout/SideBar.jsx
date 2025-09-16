@@ -10,31 +10,41 @@ import { MdOutlineLightMode } from "react-icons/md";
 
 
 export default function Sidebar() {
-    const { sidebarOpen, toggleSidebar } = uiStore();
+    const { sidebarOpen, toggleSidebar, themeColor, themeHoverColor } = uiStore();
 
     return (
         <div
-            className={`h-full bg-white shadow-lg rounded-r-xl flex flex-col items-center py-2 transition-all duration-500 `}
+            className={`h-full bg-white shadow-lg flex flex-col items-center py-2 transition-all duration-500 `}
         >
             {/* Toggle button */}
-            {sidebarOpen ? (<div className='flex justify-end w-full px-2'>
-                <div className='flex items-start'>
-                    Listro
+            {sidebarOpen ? (
+                <div className='flex justify-between w-full px-4'>
+                    <div
+                        className="flex items-center justify-between mb-3 font-bold text-2xl transition-colors duration-300 text-[color:var(--theme-color)] hover:text-[color:var(--theme-hover-color)]"
+                        style={{
+                            '--theme-color': themeColor,
+                            '--theme-hover-color': themeHoverColor,
+                        }}
+                    >
+                        Listro
+                    </div>
+                    <button
+                        onClick={toggleSidebar}
+                        className="flex justify-end mb-6 p-2 rounded-md hover:bg-gray-100 "
+                    >
+                        <IoMenu className="w-5 h-5" />
+                    </button>
                 </div>
-                <button
-                    onClick={toggleSidebar}
-                    className="flex justify-end mb-6 p-2 rounded-md hover:bg-gray-100 "
-                >
-                    <IoMenu className="w-5 h-5" />
-                </button>
-            </div>) : (<div className='flex justify-center w-full px-2'>
-                <button
-                    onClick={toggleSidebar}
-                    className="flex justify-end mb-6 p-2 rounded-md hover:bg-gray-100 "
-                >
-                    <IoMenu className="w-5 h-5" />
-                </button>
-            </div>)}
+            ) : (
+                <div className='flex justify-center w-full px-2'>
+                    <button
+                        onClick={toggleSidebar}
+                        className="flex justify-end mb-6 p-2 rounded-md hover:bg-gray-100 "
+                    >
+                        <IoMenu className="w-5 h-5" />
+                    </button>
+                </div>
+            )}
 
 
 
