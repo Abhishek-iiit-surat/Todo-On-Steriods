@@ -11,14 +11,12 @@ export default function App() {
       <div className="flex min-h-screen bg-[#e8eef7]">
         {/* Sidebar */}
         <div
-          className={`flex-shrink-0 transition-all duration-500 ${sidebarOpen ? "w-56" : "w-16"
+          className={`flex-shrink-0 h-screen sticky top-0 transition-all duration-200 ${sidebarOpen ? "w-full sm:w-full md:w-56 lg:w-56" : "w-16"
             }`}
         >
           <SideBar />
         </div>
-
-        {/* Main content */}
-        <main className="flex-1 p-2 overflow-auto">
+        <main className="flex-1 p-2 overflow-y-hidden z-0">
           <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="/profile" element={<Profile />} />

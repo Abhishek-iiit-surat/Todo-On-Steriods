@@ -17,21 +17,22 @@ export default function Sidebar() {
 
     return (
         <div
-            className={`h-full bg-white shadow-lg flex flex-col justify-between items-center py-2 transition-all duration-500 `}
+            className={`h-full bg-white shadow-lg flex flex-col justify-between items-center py-2 transition-all duration-200 `}
         >
             {/* Toggle button */}
             <div className='w-full'>
                 {sidebarOpen ? (
                     <div className='flex justify-between w-full px-4'>
-                        <div
-                            className="flex items-center justify-between mb-3 font-bold text-2xl transition-colors duration-300 text-[color:var(--theme-color)] hover:text-[color:var(--theme-hover-color)]"
+                        <a
+                            className="flex items-center justify-between mb-3 font-bold text-2xl transition-colors duration-200 text-[color:var(--theme-color)] hover:text-[color:var(--theme-hover-color)]"
                             style={{
                                 '--theme-color': themeColor,
                                 '--theme-hover-color': themeHoverColor,
                             }}
+                            href='/'
                         >
                             Listro
-                        </div>
+                        </a>
                         <button
                             onClick={toggleSidebar}
                             className="flex justify-end mb-6 p-2 rounded-md hover:bg-gray-100 "

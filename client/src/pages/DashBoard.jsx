@@ -11,34 +11,36 @@ import GenericCard from "../components/cards/GenericCard";
 export default function Dashboard() {
     const sidebarOpen = uiStore((s) => s.sidebarOpen);
 
-
     return (
         <div
-            className="grid grid-cols-4 grid-rows-3 gap-2 h-full"
-            style={{ gridTemplateRows: "6fr 4fr" }}
+            className="grid sm:grid-col-1 md:grid-col-2 lg:grid-cols-4 gap-2 h-full"
         >
-            <div className="col-span-1 row-span-2 ">
+            {/* Small Generic Cards */}
+            <div className="col-span-1">
                 <GenericCard />
             </div>
-            <div className="col-span-1 row-span-2 ">
+            <div className="col-span-1">
                 <GenericCard />
             </div>
-            <div className="col-span-1 row-span-2 ">
+            <div className="col-span-1">
                 <GenericCard />
             </div>
-            <div className="col-span-1 row-span-2 ">
+            <div className="col-span-1">
                 <GenericCard />
             </div>
-            <div className="row-span-1 col-span-2">
+
+            {/* Bigger Cards */}
+
+            <div className="col-span-2 row-span-2">
                 <UpcomingTasksCard />
             </div>
-            <div className="row-span-1 col-span-2">
+            <div className="col-span-2 row-span-2">
                 <AnalyticsCard />
             </div>
-            <div className="row-span-1 col-span-2">
+            <div className="col-span-2 row-span-2">
                 <AddTaskCard />
             </div>
-            <div className="row-span-1 col-span-2">
+            <div className="col-span-2 row-span-2">
                 <WeeklyActivityCard />
             </div>
         </div>
