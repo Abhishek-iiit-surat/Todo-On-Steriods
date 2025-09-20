@@ -1,6 +1,6 @@
 export default function AnalyticsCard() {
     return (
-        <div className="bg-white rounded-2xl p-6 h-full shadow flex gap-4 items-center justify-center">
+        <div className="bg-white rounded-3xl p-6 h-full shadow flex gap-4 items-center justify-center">
             <div className="flex-1">
                 <div className="text-sm font-medium mb-2">Radar</div>
                 <svg viewBox="0 0 120 80" width="100%" height="140">

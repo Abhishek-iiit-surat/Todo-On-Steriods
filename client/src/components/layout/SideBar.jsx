@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 import { uiStore } from "../../store/uiStore";
 import Icon from "../../components/ui/Icon";
 import { TbReportAnalytics } from "react-icons/tb";
@@ -13,8 +14,12 @@ import MaterialUISwitch from '../ui/MaterialUISwitch';
 
 
 export default function Sidebar() {
-    const { sidebarOpen, toggleSidebar, themeColor, themeHoverColor } = uiStore();
-
+    const { sidebarOpen, toggleSidebar, themeColor, themeHoverColor, darkmode, toggleDarkmode } = uiStore();
+    const handleDarkmodeClick = () => {
+        if (darkmode != undefined) {
+            toggleDarkmode(!darkmode);
+        }
+    }
     return (
         <div
             className={`h-full bg-white shadow-lg flex flex-col justify-between items-center py-2 transition-all duration-200 `}
@@ -23,16 +28,16 @@ export default function Sidebar() {
             <div className='w-full'>
                 {sidebarOpen ? (
                     <div className='flex justify-between w-full px-4'>
-                        <a
+                        <Link
                             className="flex items-center justify-between mb-3 font-bold text-2xl transition-colors duration-200 text-[color:var(--theme-color)] hover:text-[color:var(--theme-hover-color)]"
                             style={{
                                 '--theme-color': themeColor,
                                 '--theme-hover-color': themeHoverColor,
                             }}
-                            href='/'
+                            to='/'
                         >
                             Listro
-                        </a>
+                        </Link>
                         <button
                             onClick={toggleSidebar}
                             className="flex justify-end mb-6 p-2 rounded-md hover:bg-gray-100 "
@@ -55,29 +60,29 @@ export default function Sidebar() {
 
                 {/* Menu items */}
                 <nav className="flex flex-col gap-4 w-full px-2">
-                    <a
-                        href="/"
+                    <Link
+                        to="/"
                         className="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-gray-100"
                     >
                         <TbReportAnalytics className="w-5 h-5" />
                         {sidebarOpen && <span>Dashboard</span>}
-                    </a>
+                    </Link>
 
-                    <a
-                        href="/ask-ai"
+                    <Link
+                        to="/ask-ai"
                         className="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-gray-100"
                     >
                         <AutoAwesomeIcon className="w-5 h-5" />
                         {sidebarOpen && <span>Ask AI</span>}
-                    </a>
+                    </Link>
 
-                    <a
-                        href="/profile"
+                    <Link
+                        to="/profile"
                         className="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-gray-100"
                     >
                         <LuUser className="w-5 h-5" />
                         {sidebarOpen && <span>Profile</span>}
-                    </a>
+                    </Link>
                 </nav>
             </div>
 
@@ -90,7 +95,7 @@ export default function Sidebar() {
                         <>
                             <MdDarkMode className="w-5 h-5" />
                             <span>Dark Mode</span>
-                            <MaterialUISwitch />
+                            <MaterialUISwitch onClick={handleDarkmodeClick} />
                         </>
                     ) : (
                         <MaterialUISwitch className="w-10" />

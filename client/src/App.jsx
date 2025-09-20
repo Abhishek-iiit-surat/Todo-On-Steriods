@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Link } from 'react-router-dom';
 import Dashboard from "./pages/DashBoard";
 import SideBar from "./components/layout/SideBar";
 import Profile from "./pages/Profile";

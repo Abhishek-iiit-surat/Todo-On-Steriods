@@ -10,10 +10,9 @@ import GenericCard from "../components/cards/GenericCard";
 
 export default function Dashboard() {
     const sidebarOpen = uiStore((s) => s.sidebarOpen);
-
     return (
         <div
-            className="grid sm:grid-col-1 md:grid-col-2 lg:grid-cols-4 gap-2 h-full"
+            className="grid sm:grid-col-1 md:grid-col-2 lg:grid-cols-4 gap-3 h-full"
         >
             {/* Small Generic Cards */}
             <div className="col-span-1">
