@@ -87,22 +87,23 @@ export default function Sidebar() {
             </div>
 
             <nav className="flex flex-col gap-4 w-full px-2 items-start">
-                <a
-                    className={`w-full flex items-center gap-2 py-2 rounded-md hover:bg-gray-100 ${sidebarOpen ? "px-3" : "px-0"
-                        }`}
-                >
-                    {sidebarOpen ? (
-                        <>
-                            <MdDarkMode className="w-5 h-5" />
-                            <span>Dark Mode</span>
-                            <MaterialUISwitch onClick={handleDarkmodeClick} />
-                        </>
-                    ) : (
-                        <MaterialUISwitch className="w-10" />
-                    )}
-                </a>
-            </nav>
-
+        <a
+          className={`w-full flex items-center gap-2 py-2 rounded-md hover:bg-gray-100 ${
+            sidebarOpen ? "px-3" : "px-0"
+          }`}
+        >
+          {sidebarOpen && (
+            <>
+              <MdDarkMode className="w-5 h-5" />
+              <span>Dark Mode</span>
+            </>
+          )}
+          <MaterialUISwitch
+            onClick={handleDarkmodeClick}
+            className={sidebarOpen ? "" : "w-10"}
+          />
+        </a>
+      </nav>
 
 
         </div>
