@@ -6,30 +6,37 @@ import AnalyticsCard from "../components/cards/AnalyticsCard";
 import WeeklyActivityCard from "../components/cards/WeeklyActivityCard";
 import { uiStore } from "../store/uiStore";
 import GenericCard from "../components/cards/GenericCard";
-
-
+import NextTask from "../components/cards/NextTask";
+import CompletionRate from "../components/cards/CompletionRate";
+import AiCard from "../components/cards/AiCard";
+import Streak from "../components/cards/Streak";
 export default function Dashboard() {
     const sidebarOpen = uiStore((s) => s.sidebarOpen);
     return (
-        <div
-            className="grid sm:grid-col-1 md:grid-col-2 lg:grid-cols-4 gap-3 h-full"
-        >
+        <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 h-full">
             {/* Small Generic Cards */}
-            <div className="col-span-1">
-                <GenericCard />
+            <div className="col-span-1 overflow-hidden ">
+                <div className="h-full flex flex-col">
+                    <NextTask className="flex-1" />
+                </div>
             </div>
-            <div className="col-span-1">
-                <GenericCard />
+            <div className="col-span-1 overflow-hidden">
+                <div className="h-full flex flex-col">
+                    <CompletionRate className="flex-1" />
+                </div>
             </div>
-            <div className="col-span-1">
-                <GenericCard />
+            <div className="col-span-1 overflow-hidden">
+                <div className="h-full flex flex-col">
+                    <AiCard className="flex-1" />
+                </div>
             </div>
-            <div className="col-span-1">
-                <GenericCard />
+            <div className="col-span-1 overflow-hidden">
+                <div className="h-full flex flex-col">
+                    <Streak className="flex-1" />
+                </div>
             </div>
 
             {/* Bigger Cards */}
-
             <div className="col-span-2 row-span-2">
                 <UpcomingTasksCard />
             </div>

@@ -5,7 +5,7 @@ export const uiStore = create((set, get) => {
         sidebarOpen: false,
         darkmode: false,
         toggleDarkmode: (value) => set({ darkmode: value }),
-        toggleSidebar: () => set((state) => ({ sidebarOpen: !state.sidebarOpen })),
+        toggleSidebar: (value) => set({ sidebarOpen: value }),
         themeColor: "#9933ff",
         themeHoverColor: "#8000ff",
 

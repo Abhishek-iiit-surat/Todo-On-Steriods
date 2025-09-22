@@ -20,6 +20,12 @@ export default function Sidebar() {
             toggleDarkmode(!darkmode);
         }
     }
+    const handleSidebarClick = () => {
+        if (sidebarOpen != undefined) {
+            toggleSidebar(!sidebarOpen);
+        }
+    }
+
     return (
         <div
             className={`h-full bg-white shadow-lg flex flex-col justify-between items-center py-2 transition-all duration-200 `}
@@ -39,7 +45,7 @@ export default function Sidebar() {
                             Listro
                         </Link>
                         <button
-                            onClick={toggleSidebar}
+                            onClick={handleSidebarClick}
                             className="flex justify-end mb-6 p-2 rounded-md hover:bg-gray-100 "
                         >
                             <IoMenu className="w-5 h-5" />
@@ -48,7 +54,7 @@ export default function Sidebar() {
                 ) : (
                     <div className='flex justify-center w-full px-2'>
                         <button
-                            onClick={toggleSidebar}
+                            onClick={handleSidebarClick}
                             className="flex justify-end mb-6 p-2 rounded-md hover:bg-gray-100 "
                         >
                             <IoMenu className="w-5 h-5" />
@@ -87,23 +93,22 @@ export default function Sidebar() {
             </div>
 
             <nav className="flex flex-col gap-4 w-full px-2 items-start">
-        <a
-          className={`w-full flex items-center gap-2 py-2 rounded-md hover:bg-gray-100 ${
-            sidebarOpen ? "px-3" : "px-0"
-          }`}
-        >
-          {sidebarOpen && (
-            <>
-              <MdDarkMode className="w-5 h-5" />
-              <span>Dark Mode</span>
-            </>
-          )}
-          <MaterialUISwitch
-            onClick={handleDarkmodeClick}
-            className={sidebarOpen ? "" : "w-10"}
-          />
-        </a>
-      </nav>
+                <a
+                    className={`w-full flex items-center gap-2 py-2 rounded-md hover:bg-gray-100 ${sidebarOpen ? "px-3" : "px-0"
+                        }`}
+                >
+                    {sidebarOpen && (
+                        <>
+                            <MdDarkMode className="w-5 h-5" />
+                            <span>Dark Mode</span>
+                        </>
+                    )}
+                    <MaterialUISwitch
+                        onClick={handleDarkmodeClick}
+                        className={sidebarOpen ? "" : "w-10"}
+                    />
+                </a>
+            </nav>
 
 
         </div>
