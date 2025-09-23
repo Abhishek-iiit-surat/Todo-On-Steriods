@@ -12,7 +12,7 @@ export default function App() {
       <div className="flex min-h-screen bg-[#e8eef7]">
         {/* Sidebar */}
         <div
-          className={`flex-shrink-0 h-screen sticky top-0 transition-all duration-200 ${sidebarOpen ? "w-full sm:w-full md:w-56 lg:w-56" : "w-16"
+          className={`flex-shrink-0 h-screen sticky top-0 transition-all duration-200  ${sidebarOpen ? "w-full sm:w-full sm:h-screen md:w-56 lg:w-56" : "w-16"
             }`}
         >
           <SideBar />
