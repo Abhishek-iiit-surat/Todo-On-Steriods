@@ -15,7 +15,7 @@ export default function Dashboard() {
     return (
         <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2 lg:gap-3 md:gap-3 h-full overflow-hidden">
             {/* Small Generic Cards */}
-            <div className="col-span-1 row-span-1 overflow-hidden ">
+            <div className="col-span-1 row-span-1">
                 <div className="h-full flex flex-col">
                     <NextTask className="flex-1" />
                 </div>
