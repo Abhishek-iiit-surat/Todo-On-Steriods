@@ -6,10 +6,10 @@ function AiCard() {
     // Split into words, take first 10, join back & add ellipsis
     const truncated = content.split(" ").slice(0, 10).join(" ") + "...";
     return (
-        <div className="bg-white flex-col rounded-xl p-6 h-full shadow">
+        <div className="bg-white flex-col rounded-3xl p-6 h-full shadow">
             <div className="flex items-center justify-between mb-4">
-                <h3 className="text-md font-bold">What AI is saying...</h3>
-                <FaWandMagicSparkles className='w-5 h-5 text-violet-500 font-semibold' />
+                <h1 className="text-2xl font-bold">What AI is saying...</h1>
+                <FaWandMagicSparkles className='w-6 h-6 text-violet-500 font-semibold' />
             </div>
             <div >
                 <p>

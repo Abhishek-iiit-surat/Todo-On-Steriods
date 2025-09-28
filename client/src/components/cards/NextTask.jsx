@@ -8,10 +8,10 @@ function NextTask() {
     const truncated = content.split(" ").slice(0, 10).join(" ") + "...";
 
     return (
-        <div className="bg-white flex-col rounded-xl p-6 h-full shadow">
+        <div className="bg-white flex-col rounded-3xl p-6 h-full shadow">
             <div className="flex items-center justify-between mb-4">
-                <h3 className="text-md font-bold">Next Task</h3>
-                <BiTask className='w-5 h-5 text-blue-500 font-semibold' />
+                <h1 className="text-2xl font-bold">Next Task</h1>
+                <BiTask className='w-6 h-6 text-blue-500 font-semibold' />
             </div>
             <div>
                 <p>{truncated}</p>
