@@ -11,6 +11,9 @@ import CompletionRate from "../components/cards/CompletionRate";
 import AiCard from "../components/cards/AiCard";
 import { IoChevronBack, IoChevronForward } from "react-icons/io5";
 import Streak from "../components/cards/Streak";
+import { MdKeyboardDoubleArrowRight } from "react-icons/md";
+import { MdKeyboardDoubleArrowLeft } from "react-icons/md";
+
 export default function Dashboard() {
     const sidebarOpen = uiStore((s) => s.sidebarOpen);
 
@@ -35,7 +38,7 @@ export default function Dashboard() {
 
     return (
         <div className="h-full">
-            {/* 🟩 Small devices: controlled carousel + stacked big cards */}
+            {/*mall devices: controlled carousel + stacked big cards */}
             <div className="md:hidden">
                 {/* Carousel area */}
                 <div className="relative w-full">
@@ -75,7 +78,7 @@ export default function Dashboard() {
                 </div>
             </div>
 
-            {/* 🟦 md+ devices: original grid */}
+            {/*md+ devices: original grid */}
             <div className="hidden md:grid grid-cols-2 lg:grid-cols-4 gap-2 h-full">
                 {/* Small Generic Cards */}
                 <div className="col-span-1 overflow-hidden h-56">
