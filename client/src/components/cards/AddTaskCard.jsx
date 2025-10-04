@@ -100,11 +100,11 @@ function AddTaskCard() {
                     onClick={handleSave}
                     disabled={!title || !description}
                     className={`w-full px-4 py-2 rounded-lg text-white font-semibold shadow-md transition text-sm ${title && description
-                            ? "bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700"
-                            : "bg-gray-300 cursor-not-allowed"
+                        ? "bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700"
+                        : "bg-gray-300 cursor-not-allowed"
                         }`}
                 >
-                    Save Task
+                    Save Ta
                 </button>
             </div>
         </div>
